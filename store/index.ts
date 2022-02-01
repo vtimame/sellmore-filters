@@ -9,7 +9,7 @@ export interface State {
 
 export const state = (): State => ({
   _rooms: [],
-  _fineFinish: ["with_finish"],
+  _fineFinish: [],
   _square: {
     from: "",
     to: "",

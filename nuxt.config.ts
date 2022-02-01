@@ -13,7 +13,7 @@ const config: NuxtConfig = {
   },
   modules: [],
   plugins: [],
-  css: [],
+  css: ["@/assets/app.scss", "normalize.css/normalize.css"],
   build: {},
   buildModules: ["@nuxt/typescript-build"],
 };

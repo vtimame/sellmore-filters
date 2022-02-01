@@ -20,6 +20,7 @@ export default class BaseInputWrapper extends Vue {
 @import "open-color/open-color";
 
 .base-input-wrapper {
+  background-color: white;
   display: inline-flex;
   align-items: center;
   border: 1px solid $oc-gray-3;

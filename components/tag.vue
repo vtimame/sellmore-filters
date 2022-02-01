@@ -48,7 +48,7 @@ export default class Tag extends Vue {
 
   &--active,
   &:hover {
-    background-color: $oc-blue-1;
+    background-color: $oc-blue-0;
   }
 
   &__close-icon {

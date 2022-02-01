@@ -43,8 +43,7 @@ export default class FineFinishFilter extends Vue {
   @Prop({ type: Array, required: true })
   value!: string[];
 
-  onCheckboxInput(item: CheckboxItem, value: string): void {
-    // const checked = value === 'true';
+  onCheckboxInput(item: CheckboxItem): void {
     this.$emit("input", item.value);
   }
 }

@@ -28,9 +28,9 @@
         </div>
       </div>
       <div>
-        <div>{{ roomsSelected }}</div>
-        <div>{{ fineFinish }}</div>
-        <div>{{ squareRange }}</div>
+        <div>rooms: {{ roomsSelected }}</div>
+        <div>fine finish: {{ fineFinish }}</div>
+        <div>square range: {{ squareRange }}</div>
       </div>
     </div>
   </div>
@@ -92,7 +92,6 @@ export default class IndexPage extends Vue {
   }
 
   onFineFinishInput(value: string): void {
-    console.log(value);
     this.$store.commit(
       this.fineFinish.includes(value)
         ? "DELETE_FINE_FINISH_ITEM"

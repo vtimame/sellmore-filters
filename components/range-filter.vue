@@ -44,7 +44,6 @@ export default class RangeFilter extends Vue {
   rightPostfix?: string;
 
   onLeftInput(from: string): void {
-    console.log(from);
     this.$emit("input", {
       ...this.value,
       from,

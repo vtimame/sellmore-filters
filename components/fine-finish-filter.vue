@@ -11,7 +11,7 @@
         :key="item.value"
         :checkbox="item"
         :checked="value.includes(item.value)"
-        @input="onCheckboxInput(item, $event)"
+        @input="onCheckboxInput(item)"
       />
     </base-dropdown>
   </div>

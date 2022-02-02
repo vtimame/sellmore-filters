@@ -20,11 +20,11 @@ install:dependencies:
   tags:
     - mini-docker
   script:
-    - npm install
+    - npm ci
   artifacts:
     expire_in: 1 days
     paths:
-      - node_modules
+      - node_modules/
 
 build:application:
   stage: build
@@ -36,7 +36,7 @@ build:application:
   artifacts:
     expire_in: 1 days
     paths:
-      - .nuxt
+      - .nuxt/
 
 build:image:
   stage: dockerize

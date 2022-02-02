@@ -1,0 +1,19 @@
+version: "3.8"
+
+networks:
+  traefik_net:
+    external: true
+
+services:
+  application:
+    image: "${IMAGE_TAG}"
+    restart: unless-stopped
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_net"
+      - "traefik.http.routers.nginx-api.tls=true"
+      - "traefik.http.routers.nginx-api.tls.certresolver=LE"
+      - "traefik.http.services.nginx-api.loadbalancer.server.port=3000"
+      - "traefik.http.routers.nginx-api.rule=Host(`sellmore-filters.vtima.me`)"

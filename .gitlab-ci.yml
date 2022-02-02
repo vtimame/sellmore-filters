@@ -1,0 +1,71 @@
+image: docker:20.10.12
+
+services:
+  - docker:20.10.12-dind
+
+variables:
+  IMAGE_TAG:        "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
+  ENVIRONMENT_NAME: "sellmore-filters"
+
+stages:
+  - install
+  - build
+  - dockerize
+  - deploy
+  - manual
+
+install:dependencies:
+  stage: install
+  image: node:16.11-alpine
+  tags:
+    - mini-docker
+  script:
+    - npm install
+  artifacts:
+    expire_in: 1 days
+    paths:
+      - node_modules
+
+build:application:
+  stage: build
+  image: node:16.11-alpine
+  tags:
+    - mini-docker
+  script:
+    - npm run build
+  artifacts:
+    expire_in: 1 days
+    paths:
+      - .nuxt
+
+build:image:
+  stage: dockerize
+  tags:
+    - mini-docker
+  before_script: &docker-login
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $IMAGE_TAG .
+
+deploy:
+  stage: deploy
+  tags:
+    - mini
+  before_script: *docker-login
+  script:
+    - docker-compose -p $ENVIRONMENT_NAME up -d --remove-orphans
+  environment:
+    name: $ENVIRONMENT_NAME
+    on_stop: destroy
+
+destroy:
+  stage: manual
+  when: manual
+  tags:
+    - mini
+  script:
+    - docker-compose stop
+    - docker system prune --forse
+  environment:
+    name: $ENVIRONMENT_NAME
+    action: stop
